@@ -13,7 +13,8 @@
   },
   "content_scripts" : [
     {
-      "matches" : ["https://sudo-nick16.github.io/smark/share/*"],
+      "matches" : ["https://sudo-nick16.github.io/smark*"],
+      "run_at" : "document_start",
       "js" : ["sharehandler.js"]
     }
   ],

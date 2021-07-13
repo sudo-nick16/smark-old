@@ -77,6 +77,11 @@ code {
   color: #000;
   border: 1px solid #363636;
 }
+
+.add-playlist-button:active{
+  background-color: rgb(13, 197, 120);
+}
+
 .search-list {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
@@ -143,22 +148,23 @@ code {
 }
 .list-content-name:focus,
 .list-content-name:hover {
-  background-color: #221b3b;
+  background-color: #0e0e0e;
 }
 .main-div {
   background-color: #1f1f1f;
-  width: 160px;
-  min-width: 140px;
+  width: 165px;
+  min-width: 145px;
   height: 95px;
   border: 2px solid #202020;
   border-radius: 10px;
   box-shadow: 0 0 15px #000;
   margin: 20px;
   position: relative;
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
 }
 .main-div:hover {
-  transform: scale(1.03);
+  transform: scale(1.01);
+
 }
 .main-div:active {
   transform: scale(1);
@@ -379,6 +385,9 @@ code {
   color: #000;
   border: 1px solid #000;
 }
+.share-button:active{
+  background-color: rgb(13, 197, 120);
+}
 .list-delete-button {
   background-color: #000;
   border: 1px solid #00ffb3;
@@ -393,6 +402,9 @@ code {
   background-color: #00ffbf;
   color: #000;
   border: 1px solid #000;
+}
+.list-delete-button:active{
+  background-color: rgb(13, 197, 120);
 }
 .list-edit-button {
   background-color: #000;
@@ -409,6 +421,11 @@ code {
   color: #000;
   border: 1px solid #000;
 }
+
+.list-edit-button:active{
+  background-color: rgb(13, 197, 120);
+}
+
 .empty-div-for-right-section-header {
   width: 17%;
   height: 37px;
@@ -586,7 +603,7 @@ code {
   transition: all 0.3s ease;
 }
 .add:active {
-  background-color: #1b916d !important;
+  background-color: #07a072 !important;
   color: #000;
 }
 .add:hover {

@@ -40,7 +40,7 @@
                     return t.modify.playlistInFocus;
                   }) === e
                     ? { backgroundColor: "rgb(31,31,31)", width: "99%" }
-                    : { backgroundColor: "rgb(0, 0, 0)" },
+                    : {},
               }),
             n = Object(b.b)();
           return Object(O.jsx)(
@@ -57,7 +57,7 @@
             )
           );
         },
-        h =
+        y =
           (a(57),
           a(37),
           Object(n.forwardRef)(function (t, e) {
@@ -103,7 +103,7 @@
                 )
               : null;
           })),
-        y =
+        h =
           (a(58),
           function (t) {
             var e = t.title,
@@ -124,10 +124,10 @@
               [e, a]
             );
             var f = Object(n.useRef)(),
-              y = Object(b.b)(),
+              h = Object(b.b)(),
               m = function () {
                 var t;
-                y({
+                h({
                   type: "EditUrl",
                   payload: {
                     newTitle: (t = {
@@ -174,7 +174,7 @@
                   className: "delete-url",
                   onClick: function () {
                     var t;
-                    y({
+                    h({
                       type: "DeleteUrl",
                       payload: {
                         title: (t = { title: e, index: l }).title,
@@ -188,7 +188,7 @@
                     className: "close-img",
                   }),
                 }),
-                Object(O.jsxs)(h, {
+                Object(O.jsxs)(y, {
                   ref: f,
                   children: [
                     Object(O.jsx)("h1", {
@@ -332,10 +332,11 @@
                                         f();
                                     })
                                     .catch(function () {
-                                      alert(
-                                        "Couldn't shorten url..long url will be pasted to your clipboard"
-                                      ),
-                                        navigator.clipboard.writeText(e),
+                                      navigator.clipboard.writeText(e),
+                                        alert(
+                                          "Couldn't shorten url..long url will be pasted to your clipboard"
+                                        ),
+                                        f(),
                                         console.log(e);
                                     })
                                 );
@@ -457,7 +458,7 @@
             ],
           });
         },
-        C = function () {
+        w = function () {
           var t = Object(b.c)(function (t) {
               return t.modify.urlListsToShow;
             }),
@@ -498,7 +499,7 @@
                       children: e.length
                         ? e.map(function (t, e) {
                             return Object(O.jsx)(
-                              y,
+                              h,
                               { title: t.title, url: t.url, index: e },
                               e
                             );
@@ -514,7 +515,7 @@
             }),
           });
         },
-        N =
+        S =
           (a(73),
           function (t) {
             var e = Object(b.b)(),
@@ -598,7 +599,7 @@
                     children: "SMARK",
                   }),
                 }),
-                Object(O.jsx)(C, {}),
+                Object(O.jsx)(w, {}),
                 Object(O.jsxs)("div", {
                   className: "footer",
                   children: [
@@ -626,10 +627,10 @@
               ],
             });
           }),
-        w = function (t) {
+        C = function (t) {
           var e = Object(b.b)();
           console.log("Share"),
-            sessionStorage.setItem(t.location.pathname, t.location.hash);
+          sessionStorage.setItem(t.location.pathname, t.location.hash);
           console.log(t);
           var a = t.location.hash;
           if (0 === a.length || "#" !== a[0])
@@ -655,14 +656,14 @@
             Object(O.jsx)("div", { children: Object(O.jsx)(s.a, { to: "/" }) })
           );
         };
-      var S = function () {
+      var N = function () {
           return Object(O.jsx)(r.a, {
             children: Object(O.jsx)("div", {
               className: "App",
               children: Object(O.jsxs)(s.d, {
                 children: [
-                  Object(O.jsx)(s.b, { path: "/share", component: w }),
-                  Object(O.jsx)(s.b, { exact: !0, path: "/", component: N }),
+                  Object(O.jsx)(s.b, { path: "/share", component: C }),
+                  Object(O.jsx)(s.b, { exact: !0, path: "/", component: S }),
                 ],
               }),
             }),
@@ -670,15 +671,15 @@
         },
         L = a(3);
       console.log("RENDERED");
-      var k = {};
+      var I = {};
       localStorage.getItem("Home") ||
         (localStorage.setItem("Home", JSON.stringify([])),
         localStorage.setItem("##SeLeCtEd#$", ""));
-      for (var I = 0; I < localStorage.length; I++) {
-        var E = localStorage.key(I);
+      for (var k = 0; k < localStorage.length; k++) {
+        var E = localStorage.key(k);
         if ("##SeLeCtEd#$" !== E) {
           var U = localStorage.getItem(E);
-          (U = JSON.parse(U)), (k[E] = U);
+          (U = JSON.parse(U)), (I[E] = U);
         }
       }
       var R = function (t) {
@@ -696,13 +697,13 @@
             return (e[a] = t[a]), e;
           }, {});
       };
-      k = Object(j.a)({}, R(k));
+      I = Object(j.a)({}, R(I));
       var T = [];
-      for (var P in k) P.hasOwnProperty && T.push(P);
+      for (var P in I) P.hasOwnProperty && T.push(P);
       var F = {
           playlistInFocus: "Home",
-          playlistContent: k.Home,
-          playlists: k,
+          playlistContent: I.Home,
+          playlists: I,
           urlLists: T,
           urlListsToShow: T,
         },
@@ -719,7 +720,18 @@
                 ((e.payload.searchUrllistRef.current.value = ""),
                 t.urlLists.includes(a))
               ) {
-                var n = Object(j.a)(
+                var n = window.confirm(
+                  "Do you wanna empty the current URL list?"
+                );
+                if (!n) {
+                  var l = Object(j.a)(
+                    Object(j.a)({}, t),
+                    {},
+                    { urlListsToShow: Object(L.a)(t.urlLists) }
+                  );
+                  return l;
+                }
+                var c = Object(j.a)(
                   Object(j.a)({}, t),
                   {},
                   {
@@ -728,11 +740,15 @@
                     playlistContent: [],
                   }
                 );
-                return n;
+                return (
+                  (c.playlists[a] = []),
+                  localStorage.setItem(a, JSON.stringify([])),
+                  c
+                );
               }
               localStorage.setItem(a, JSON.stringify([])), t.urlLists.push(a);
-              var l = Object(L.a)(t.urlLists);
-              l.sort(function (t, e) {
+              var r = Object(L.a)(t.urlLists);
+              r.sort(function (t, e) {
                 return "Home" === t
                   ? -1
                   : "Home" === e || t.toLowerCase() > e.toLowerCase()
@@ -741,203 +757,202 @@
                   ? -1
                   : 0;
               });
-              var c = Object(j.a)(
+              var s = Object(j.a)(
                 Object(j.a)({}, t),
                 {},
                 {
-                  urlListsToShow: Object(L.a)(l),
-                  urlLists: Object(L.a)(l),
+                  urlListsToShow: Object(L.a)(r),
+                  urlLists: Object(L.a)(r),
                   playlistInFocus: a,
                   playlistContent: [],
                 }
               );
               return (
-                (c.playlists[a] = []),
-                (c.playlists = Object(j.a)({}, R(c.playlists))),
-                c
+                (s.playlists[a] = []),
+                (s.playlists = Object(j.a)({}, R(s.playlists))),
+                s
               );
             case "Delete":
-              var r = "".concat(t.playlistInFocus);
-              if ("Home" === r) return t;
-              var s = [];
-              for (var o in t.urlLists)
-                t.urlLists[o] !== r && s.push(t.urlLists[o]);
-              localStorage.removeItem(r);
-              var i = {},
-                u = function () {
+              var o = "".concat(t.playlistInFocus);
+              if ("Home" === o) return t;
+              var i = [];
+              for (var u in t.urlLists)
+                t.urlLists[u] !== o && i.push(t.urlLists[u]);
+              localStorage.removeItem(o);
+              var d = {},
+                b = function () {
                   for (var e in t.playlists)
-                    e.hasOwnProperty && e !== r && (i[e] = t.playlists[e]);
+                    e.hasOwnProperty && e !== o && (d[e] = t.playlists[e]);
                 };
-              u();
-              var d = Object(j.a)(
+              b();
+              var p = Object(j.a)(
                 Object(j.a)({}, t),
                 {},
                 {
-                  urlLists: s,
-                  urlListsToShow: s,
+                  urlLists: i,
+                  urlListsToShow: i,
                   playlistInFocus: "Home",
                   playlistContent: t.playlists.Home,
-                  playlists: i,
+                  playlists: d,
                 }
               );
-              return d;
+              return p;
             case "Focus":
-              var b = "".concat(e.payload),
-                p = Object(j.a)(
+              var O = "".concat(e.payload),
+                f = Object(j.a)(
                   Object(j.a)({}, t),
                   {},
                   {
-                    playlistInFocus: b,
-                    playlistContent: Object(L.a)(t.playlists[b]),
+                    playlistInFocus: O,
+                    playlistContent: Object(L.a)(t.playlists[O]),
                   }
                 );
-              return p;
+              return f;
             case "AddUrl":
-              var O = e.payload.url,
-                f = e.payload.title,
-                h = t.playlistInFocus,
-                y = [].concat(Object(L.a)(t.playlistContent), [
-                  { title: f, url: O },
+              var y = e.payload.url,
+                h = e.payload.title,
+                m = t.playlistInFocus,
+                v = [].concat(Object(L.a)(t.playlistContent), [
+                  { title: h, url: y },
                 ]),
-                m = Object(j.a)(
+                g = Object(j.a)(
                   Object(j.a)({}, t),
                   {},
-                  { playlistContent: Object(L.a)(y) }
+                  { playlistContent: Object(L.a)(v) }
                 );
               return (
-                (m.playlists[h] = Object(L.a)(y)),
-                localStorage.setItem(h, JSON.stringify(y)),
-                m
+                (g.playlists[m] = Object(L.a)(v)),
+                localStorage.setItem(m, JSON.stringify(v)),
+                g
               );
             case "DeleteUrl":
-              var v = e.payload.title,
-                g = String(e.payload.key),
-                x = t.playlistInFocus,
+              var x = e.payload.title,
+                w = String(e.payload.key),
+                S = t.playlistInFocus,
                 C = [],
                 N = t.playlistContent;
-              for (var w in t.playlistContent)
-                (N[w].title === v && w === g) ||
+              for (var I in t.playlistContent)
+                (N[I].title === x && I === w) ||
                   (C = [].concat(Object(L.a)(C), [
-                    { title: N[w].title, url: N[w].url },
+                    { title: N[I].title, url: N[I].url },
                   ]));
-              var S = Object(j.a)(
+              var k = Object(j.a)(
                 Object(j.a)({}, t),
                 {},
                 { playlistContent: Object(L.a)(C) }
               );
               return (
-                (S.playlists[x] = Object(L.a)(C)),
-                localStorage.setItem(x, JSON.stringify(C)),
-                S
+                (k.playlists[S] = Object(L.a)(C)),
+                localStorage.setItem(S, JSON.stringify(C)),
+                k
               );
             case "AddSharedPlaylist":
-              var k = e.payload,
-                I = "",
-                E = [];
-              for (var U in k) (I = U), (E = Object(L.a)(k[U]));
-              var T = t.urlLists,
-                P = Object(L.a)(t.urlLists);
-              T.includes(I)
-                ? (E = [].concat(Object(L.a)(E), Object(L.a)(t.playlists[I])))
-                : P.push(I),
-                localStorage.setItem(I, JSON.stringify(E));
-              var H = Object(j.a)(
+              var E = e.payload,
+                U = "",
+                T = [];
+              for (var P in E) (U = P), (T = Object(L.a)(E[P]));
+              var H = Object(L.a)(t.urlLists),
+                D = Object(L.a)(t.urlLists);
+              H.includes(U)
+                ? (T = [].concat(Object(L.a)(T), Object(L.a)(t.playlists[U])))
+                : D.push(U),
+                localStorage.setItem(U, JSON.stringify(T));
+              var A = Object(j.a)(
                 Object(j.a)({}, t),
                 {},
                 {
-                  urlLists: Object(L.a)(P),
-                  urlListsToShow: Object(L.a)(P),
-                  playlistInFocus: I,
-                  playlistContent: Object(L.a)(E),
-                  playlists: Object(j.a)(Object(j.a)({}, t.playlists), k),
+                  urlLists: Object(L.a)(D),
+                  urlListsToShow: Object(L.a)(D),
+                  playlistInFocus: U,
+                  playlistContent: Object(L.a)(T),
                 }
               );
-              return H;
+              return (A.playlists[U] = T), A;
             case "SearchUrl":
-              var D,
-                A = e.payload,
-                _ = t.playlists[t.playlistInFocus];
-              D =
-                A.length > 0
-                  ? _.filter(function (t) {
-                      var e = new RegExp("".concat(A), "gi");
+              var J,
+                _ = e.payload,
+                K = t.playlists[t.playlistInFocus];
+              J =
+                _.length > 0
+                  ? K.filter(function (t) {
+                      var e = new RegExp("".concat(_), "gi");
                       return t.title.match(e);
                     })
-                  : _;
-              var J = Object(j.a)(
+                  : K;
+              var B = Object(j.a)(
                 Object(j.a)({}, t),
                 {},
-                { playlistContent: D }
+                { playlistContent: J }
               );
-              return J;
+              return B;
             case "SearchPlaylist":
-              var K,
-                B = e.payload,
-                X = t.urlLists;
-              K =
-                B.length > 0
-                  ? X.filter(function (t) {
-                      var e = new RegExp("".concat(B), "gi");
+              var X,
+                M = e.payload,
+                V = t.urlLists;
+              X =
+                M.length > 0
+                  ? V.filter(function (t) {
+                      var e = new RegExp("".concat(M), "gi");
                       return t.match(e);
                     })
-                  : X;
-              var M = Object(j.a)(
+                  : V;
+              var $ = Object(j.a)(
                 Object(j.a)({}, t),
                 {},
-                { urlListsToShow: K }
+                { urlListsToShow: X }
               );
-              return M;
+              return $;
             case "EditPlaylist":
-              var V = e.payload,
-                $ = t.playlistInFocus;
-              if ("Home" === $) return t;
-              localStorage.removeItem($),
-                localStorage.setItem(V, JSON.stringify(t.playlistContent));
-              var q = Object(L.a)(t.urlLists);
-              for (var z in q) q[z] === $ && (q[z] = V);
-              var G = Object(L.a)(t.urlListsToShow);
-              for (var Q in G) G[Q] === $ && (G[Q] = V);
-              var W = {},
-                Y = function () {
+              var q = e.payload,
+                z = t.playlistInFocus;
+              if ("Home" === z) return t;
+              localStorage.removeItem(z),
+                localStorage.setItem(q, JSON.stringify(t.playlistContent));
+              var G = Object(L.a)(t.urlLists);
+              for (var Q in G) G[Q] === z && (G[Q] = q);
+              var W = Object(L.a)(t.urlListsToShow);
+              for (var Y in W) W[Y] === z && (W[Y] = q);
+              var Z = {},
+                tt = function () {
                   for (var e in t.playlists)
-                    e.hasOwnProperty && e !== $ && (W[e] = t.playlists[e]);
+                    e.hasOwnProperty && e !== z && (Z[e] = t.playlists[e]);
                 };
-              Y(), (W[V] = Object(L.a)(t.playlistContent));
-              var Z = Object(j.a)(
+              tt(), (Z[q] = Object(L.a)(t.playlistContent));
+              var et = Object(j.a)(
                 Object(j.a)({}, t),
                 {},
                 {
-                  urlLists: Object(L.a)(q),
-                  urlListsToShow: Object(L.a)(G),
-                  playlists: Object(j.a)({}, W),
-                  playlistInFocus: V,
+                  urlLists: Object(L.a)(G),
+                  urlListsToShow: Object(L.a)(W),
+                  playlists: Object(j.a)({}, Z),
+                  playlistInFocus: q,
                 }
               );
-              return Z;
+              return et;
             case "EditUrl":
-              var tt = e.payload,
-                et = tt.newTitle,
-                at = tt.newUrl,
-                nt = tt.oldUrl,
-                lt = tt.oldTitle,
-                ct = Object(L.a)(t.playlistContent);
-              for (var rt in ct)
-                ct[rt].title === lt &&
-                  ct[rt].url === nt &&
-                  ((ct[rt].title = et), (ct[rt].url = at));
-              var st = Object(j.a)({}, t.playlists),
-                ot = t.playlistInFocus;
-              st[ot] = ct;
-              var it = Object(j.a)(
+              var at = e.payload,
+                nt = at.newTitle,
+                lt = at.newUrl,
+                ct = at.oldUrl,
+                rt = at.oldTitle,
+                st = Object(L.a)(t.playlistContent);
+              for (var ot in st)
+                st[ot].title === rt &&
+                  st[ot].url === ct &&
+                  ((st[ot].title = nt), (st[ot].url = lt));
+              var it = Object(j.a)({}, t.playlists),
+                ut = t.playlistInFocus;
+              it[ut] = st;
+              var dt = Object(j.a)(
                 Object(j.a)({}, t),
                 {},
                 {
-                  playlists: Object(j.a)({}, st),
-                  playlistContent: Object(L.a)(ct),
+                  playlists: Object(j.a)({}, it),
+                  playlistContent: Object(L.a)(st),
                 }
               );
               return (
-                localStorage.setItem(t.playlistInFocus, JSON.stringify(ct)), it
+                localStorage.setItem(t.playlistInFocus, JSON.stringify(st)), dt
               );
             default:
               return t;
@@ -945,13 +960,13 @@
         },
         D = a(25),
         A = Object(D.a)({ modify: H }),
-        _ = Object(D.b)(
+        J = Object(D.b)(
           A,
           window.__REDUX_DEVTOOLS_EXTENSION__ &&
             window.__REDUX_DEVTOOLS_EXTENSION__()
         );
       c.a.render(
-        Object(O.jsx)(b.a, { store: _, children: Object(O.jsx)(S, {}) }),
+        Object(O.jsx)(b.a, { store: J, children: Object(O.jsx)(N, {}) }),
         document.getElementById("root")
       );
     },

@@ -21,7 +21,7 @@
 > Note :<br/>
 Install chrome extension as it makes the process of bookmarking sites easier.
 
-<a href="https://chrome.google.com/webstore/detail/smark/nihhjdlipbbbkgmflkehhilajakphmpe/" > Download Chrome Extension </a>
+<a href="https://chrome.google.com/webstore/detail/smark/nihhjdlipbbbkgmflkehhilajakphmpe/" target="_blank" > Download Chrome Extension </a>
 
 ### Screenshots :
 

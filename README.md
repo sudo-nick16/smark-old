@@ -1,6 +1,6 @@
 # Smark <img src="https://github.com/sudo-nick16/smark/blob/main/logo.png" width="25px" height="25px" />
 
-Smark is a smart bookmarking tool.
+### Smark is a smart bookmarking tool.
 
 ### Features : 
 <ul>
